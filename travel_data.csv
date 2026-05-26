@@ -1,0 +1,4 @@
+category,scope,activity_value,unit
+Flight,Scope 3,1200,km
+Hotel,Scope 3,3,nights
+Cab,Scope 3,50,km

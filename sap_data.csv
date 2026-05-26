@@ -1,0 +1,4 @@
+category,scope,activity_value,unit
+Fuel,Scope 1,100,liters
+Electricity,Scope 2,500,kwh
+Travel,Scope 3,200,km
