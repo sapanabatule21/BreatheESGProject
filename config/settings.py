@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-^(mz=(+tu80p18082s(idi(nz5o#pb1yirnd&uad6=##ay=@vq
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    "breathe-esg-backend-t0da.onrender.com/",
+    "breathe-esg-backend-t0da.onrender.com",
     "127.0.0.1",
     "localhost"
 ]
