@@ -1,45 +1,42 @@
 import { useState } from "react";
 import axios from "axios";
 
-export default function Upload() {
+const API_BASE = "https://breathe-esg-backend-t0da.onrender.com";
 
+export default function Upload() {
   const [file, setFile] = useState(null);
   const [type, setType] = useState("SAP");
 
   const upload = async () => {
+    if (!file) {
+      alert("Please select a file");
+      return;
+    }
 
-  try {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("type", type);
 
-    const formData = new FormData();
+      const response = await axios.post(
+        `${API_BASE}/api/emissions/upload/`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
-    formData.append("file", file);
-    formData.append("type", type);
-
-    const response = await axios.post(
-      "http://127.0.0.1:8000/api/emissions/upload/",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-
-    alert(response.data.message);
-
-  } catch (error) {
-
-    console.log(error);
-
-    alert("Request Failed");
-
-  }
-
-};
+      alert(response.data.message);
+    } catch (error) {
+      console.log(error);
+      alert("Request Failed");
+    }
+  };
 
   return (
     <div>
-
       <h3>Upload Data</h3>
 
       <input
@@ -47,7 +44,8 @@ export default function Upload() {
         onChange={(e) => setFile(e.target.files[0])}
       />
 
-      <br /><br />
+      <br />
+      <br />
 
       <select onChange={(e) => setType(e.target.value)}>
         <option value="SAP">SAP</option>
@@ -55,12 +53,10 @@ export default function Upload() {
         <option value="TRAVEL">Travel</option>
       </select>
 
-      <br /><br />
+      <br />
+      <br />
 
-      <button onClick={upload}>
-        Upload File
-      </button>
-
+      <button onClick={upload}>Upload File</button>
     </div>
   );
 }
